@@ -1,0 +1,21 @@
+{
+  "name": "Cheapbay",
+  "version": "0.1.0",
+  "description": "Ebay scraper with Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "filkor.tamas",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "nightmare": "^3.0.2",
+    "sqlite3": "^4.0.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

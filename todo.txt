@@ -1,0 +1,4 @@
+0. Csak látható elemekre szűri ✅
+1. Átalakítani, hogy ne csak árat kérjünk le, hanem más infókat is Objectben ✅
+2. Letárolni az adatokat (sqlite vagy lowDb)
+3. cronjob (node-cron)
