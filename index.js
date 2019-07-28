@@ -6,11 +6,21 @@ const utility = require('./lib/utility');
 const app = express();
 const port = 3000;
 
-app.get('/scrape', async (req, res) => {
+async function initSettings() {
+  const dataBase = await db.openDb();
+  await db.createSettingsTable(dataBase);
+}
+
+app.get('/scrape', async (req, res, next) => {
   const result = {
     hasChange: false,
     changes: []
   };
+  const dataBase = await db.openDb();
+  const setting = await db.selectSettings(dataBase);
+  // TODO: Create convertSearchString utility function and upgrade screaper.js
+  // const searchString = utility.convertSearchString(setting);
+  // const html = await scraper.getHtml(searchString)
   const html = await scraper.getHtml('thinkpad+x1+6th');
   const scrapedItems = scraper.getItem(html);
 
@@ -20,8 +30,6 @@ app.get('/scrape', async (req, res) => {
     res.json(result);
     return;
   }
-
-  const dataBase = await db.openDb();
 
   if (result.changes.new.length > 0) {
     for (const newItem of result.changes.new) {
@@ -47,3 +55,4 @@ app.get('/kecske', async (req, res) => {
 });
 
 app.listen(port, () => console.log(`Cheabay app listening on port ${port}!`));
+initSettings();
